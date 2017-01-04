@@ -64,6 +64,7 @@ extension Matrix {
         assert(self.columns == matrix2.rows)
         var result = Matrix(rows: self.rows, columns: matrix2.columns)
         vDSP_mmulD(self.grid, 1, matrix2.grid, 1, &result.grid, 1, UInt(self.rows), UInt(matrix2.columns), UInt(self.columns))
+        // Note: this could also be achieved using cblas_dgemm
         return result
     }
     
