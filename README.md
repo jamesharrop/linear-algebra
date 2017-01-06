@@ -1,5 +1,5 @@
 # linear-algebra
-A matrix struct data type to simplify linear algebra using the Accelerate framework and higher order function. Operator overloading is used to make the matrix calculations more readable.
+A matrix struct data type to simplify linear algebra using the Accelerate framework and higher order functions. Operator overloading is used to make the matrix calculations more readable.
 
 ## Example usage
 
