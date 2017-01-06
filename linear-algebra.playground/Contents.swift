@@ -59,15 +59,6 @@ extension Matrix {
         return result
     }
     
-    // Multiplying two matrices: matrix multiplication
-    func multiply(_ matrix2: Matrix) -> Matrix {
-        assert(self.columns == matrix2.rows)
-        var result = Matrix(rows: self.rows, columns: matrix2.columns)
-        vDSP_mmulD(self.grid, 1, matrix2.grid, 1, &result.grid, 1, UInt(self.rows), UInt(matrix2.columns), UInt(self.columns))
-        // Note: this could also be achieved using cblas_dgemm
-        return result
-    }
-    
     // Multiplying two matrices: element-wise multiplication
     func elementMultiply(_ matrix2: Matrix) -> Matrix {
         assert(self.rows == matrix2.rows && self.columns == matrix2.columns)
@@ -116,6 +107,15 @@ prefix func -(right: Matrix) -> Matrix {
     return -1.0*right
 }
 
+// Multiplying two matrices: matrix multiplication
+func *(left: Matrix, right: Matrix) -> Matrix {
+    assert(left.columns == right.rows)
+    var result = Matrix(rows: left.rows, columns: right.columns)
+    vDSP_mmulD(left.grid, 1, right.grid, 1, &result.grid, 1, UInt(left.rows), UInt(right.columns), UInt(left.columns))
+    // Note: this could also be achieved using cblas_dgemm
+    return result
+}
+
 // Multiplying a matrix by a scalar
 func *(left: Matrix, right: Double) -> Matrix {
     return Matrix(rows: left.rows, columns: left.columns, grid: left.grid.map({$0*right}))
@@ -154,11 +154,12 @@ func sum(_ input: Matrix) -> Double {
 // -------------
 
 var x = Matrix(rows: 2, columns: 2, grid: [1,2,3,4])
+
 var y = Matrix(rows: 2, columns: 2, grid: [3,5,6,7])
 
 print(x.transpose())
 
-print(x.multiply(y))
+print(x*y)
 
 print(x-y)
 

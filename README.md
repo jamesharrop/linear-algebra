@@ -1,5 +1,5 @@
 # linear-algebra
-A matrix struct data type to simplify linear algebra using the Accelerate framework.
+A matrix struct data type to simplify linear algebra using the Accelerate framework and higher order function. Operator overloading is used to make the matrix calculations more readable.
 
 ## Example usage
 
@@ -15,7 +15,7 @@ Transpose of a matrix:
 
 Multiply two matrices:
 
-    x.multiply(y)
+    x*y
 
 Element-wise multiplication:
 
