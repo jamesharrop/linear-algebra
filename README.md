@@ -19,7 +19,7 @@ Multiply two matrices:
 
 Element-wise multiplication:
 
-    m1.elementMultiply(y)
+    x.elementMultiply(y)
 
 Subtract two matrices:
 
