@@ -48,9 +48,6 @@ extension Matrix {
             grid[(row * columns) + column] = newValue
         }
     }
-}
-
-extension Matrix {
 
     // Transposing a matrix
     func transpose() -> Matrix {

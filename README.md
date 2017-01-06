@@ -29,6 +29,16 @@ Add or subtract a scalar (double)
 
     1-x
 
-Multiply by a scalar:
+Multiply by a scalar (double):
 
-    2*y
+    2*x
+
+Sum a matrix:
+
+    sum(x)
+
+Some useful functions for logistic regression / machine learning:
+
+    log(x)
+
+    sigmoid(x)
