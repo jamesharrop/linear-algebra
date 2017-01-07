@@ -1,12 +1,13 @@
 //: Linear algebra
 
-// Matrix struct is adapted and extended from Apple documentation
-// https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html
-
 import Foundation
 import Accelerate
 
 struct Matrix {
+    
+    // Matrix struct is adapted and extended from Apple documentation
+    // https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/Subscripts.html
+    
     let rows: Int, columns: Int
     var grid: [Double]
     
@@ -59,7 +60,7 @@ extension Matrix {
     // Multiplying two matrices: element-wise multiplication
     func elementMultiply(_ matrix2: Matrix) -> Matrix {
         assert(self.rows == matrix2.rows && self.columns == matrix2.columns)
-        return Matrix(rows: self.columns, columns: self.rows, grid: zip(self.grid, matrix2.grid).map(*))
+        return Matrix(rows: self.rows, columns: self.columns, grid: zip(self.grid, matrix2.grid).map(*))
     }
 
 }
