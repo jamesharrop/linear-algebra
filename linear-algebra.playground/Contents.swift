@@ -146,6 +146,53 @@ func sum(_ input: Matrix) -> Double {
     return input.grid.reduce(0.0,+)
 }
 
+// Reading data into a matrix from a CSV file in the resources section of the playground
+func readDataFromFile(fileName: String, fileNameExtension: String) -> Matrix? {
+    // Read in data from file
+    var grid: [Double] = []
+    var rows = 0
+    var columns = 0
+    
+    // Open the file
+    guard let fileURL = Bundle.main.url(forResource:fileName, withExtension: fileNameExtension) else {
+        print("File not found")
+        return nil
+    }
+    
+    // Read the file contents to a String
+    guard let text = try? String(contentsOf: fileURL, encoding: String.Encoding.utf8)
+        else {
+            print("Error reading the file contents")
+            return nil
+    }
+    
+    // Split the lines into a String array, removing any empty lines
+    let lines = text.components(separatedBy: String("\n")).filter( { $0 != "" } )
+    
+    // Split each line into components
+    for line in lines {
+        rows += 1
+        let lineComponents = line.components(separatedBy: ",")
+        if rows == 1 { // first row
+            columns = lineComponents.count
+        }
+        if columns != lineComponents.count {
+            print("Error at file line:", rows)
+            print("Number of values in each line of file varies")
+            return nil
+        }
+        for component in lineComponents.enumerated() {
+            if let componentAsDouble = Double(component.1) {
+                grid.append(componentAsDouble)
+            } else {
+                print("Error at file line:", rows)
+                print("Can not convert file values to type Double")
+                return nil
+            }
+        }
+    }
+    return Matrix(rows: rows, columns: columns, grid: grid)
+}
 
 
 // Example usage

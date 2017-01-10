@@ -42,3 +42,7 @@ Some useful functions for logistic regression / machine learning:
     log(x)
 
     sigmoid(x)
+
+Read data from a CSV file into a matrix:
+
+    guard let dataMatrix = readDataFromFile(fileName: "data", fileNameExtension: "txt") else { assert(false) }
