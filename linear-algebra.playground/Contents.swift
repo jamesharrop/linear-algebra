@@ -65,6 +65,52 @@ extension Matrix {
 
 }
 
+// Printing a matrix
+extension Matrix : CustomStringConvertible {
+    
+    public var description: String {
+        var returnString = ""
+        for row in 0..<self.rows {
+            let thisRow = Array(self.grid[row*(self.columns)..<((row+1)*self.columns)])
+            returnString += rowAsAString(thisRow) + "\n"
+        }
+        return returnString
+    }
+    
+    func rowAsAString(_ a: [Double]) -> String {
+        let num = a.count
+        
+        let maxSpace = 6 // If there are more columns than this, then some will be omitted from the printed output
+        let firstElements = 3
+        let lastElements = 3
+        
+        var returnString = ""
+        
+        if num<=maxSpace {
+            // Print whole matrix
+            for n in 0..<num {
+                returnString += numberAsString(number: a[n]) + " "
+            }
+        } else {
+            // Print partial matrix
+            for n in 0..<firstElements {
+                returnString += numberAsString(number: a[n]) + " "
+            }
+            returnString += "... "
+            for n in (num-lastElements)..<num {
+                returnString += numberAsString(number: a[n]) + " "
+            }
+        }
+        // Remove the last character
+        return returnString.substring(to: returnString.index(before: returnString.endIndex))
+    }
+    
+    func numberAsString(number: Double) -> String {
+        // Format all numbers as scientific format of fixed length
+        return String(format: "%+10e", number)
+    }
+}
+
 // Operator overloading
 // --------------------
 
@@ -213,4 +259,7 @@ print(1-x)
 print(2*y)
 
 print(x.elementMultiply(y))
+
+print(y)
+
 
