@@ -13,8 +13,8 @@ Print a matrix:
 
     print(y)
 
-    +3.000000e+00 +5.000000e+00
-    +6.000000e+00 +7.000000e+00
+    3             5   
+    6             7
 
 Transpose of a matrix:
 

@@ -106,8 +106,17 @@ extension Matrix : CustomStringConvertible {
     }
     
     func numberAsString(number: Double) -> String {
-        // Format all numbers as scientific format of fixed length
-        return String(format: "%+10e", number)
+        var returnString: String
+        if abs(number)<10000 {
+            returnString = String(format: "%10g", number)+"   "
+        } else {
+            // Format larger numbers as scientific format of fixed length
+            returnString = String(format: "%10e", number)
+            if number>=0 {
+                returnString = " " + returnString
+            }
+        }
+        return returnString
     }
 }
 
@@ -261,5 +270,3 @@ print(2*y)
 print(x.elementMultiply(y))
 
 print(y)
-
-
