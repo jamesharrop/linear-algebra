@@ -52,4 +52,4 @@ Some useful functions for logistic regression / machine learning:
 
 Read data from a CSV file into a matrix:
 
-    guard let dataMatrix = readDataFromFile(fileName: "data", fileNameExtension: "txt") else { assert(false) }
+    guard let dataMatrix = readDataFromFile(fileName: "data", fileNameExtension: "txt") else { print("Error reading file") }
