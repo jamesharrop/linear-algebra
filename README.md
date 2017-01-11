@@ -9,12 +9,16 @@ Define matrices:
 
     var y = Matrix(rows: 2, columns: 2, grid: [3,5,6,7])
 
+    var z = Matrix(identityMatrixSize: 3)
+
 Print a matrix:
 
-    print(y)
+    print(z)
 
-    3             5   
-    6             7
+    1             0             0   
+    0             1             0   
+    0             0             1   
+
 
 Transpose of a matrix:
 
@@ -44,7 +48,7 @@ Sum a matrix:
 
     sum(x)
 
-Some useful functions for logistic regression / machine learning:
+Some useful functions for logistic regression, machine learning:
 
     log(x)
 

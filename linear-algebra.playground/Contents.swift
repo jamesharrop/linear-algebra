@@ -11,6 +11,7 @@ struct Matrix {
     let rows: Int, columns: Int
     var grid: [Double]
     
+    // A matrix of zeros
     init(rows: Int, columns: Int) {
         self.rows = rows
         self.columns = columns
@@ -23,6 +24,17 @@ struct Matrix {
         self.columns = columns
         self.grid = grid
         checkDimensionsAreValid()
+    }
+    
+    // Identity matrix
+    init(identityMatrixSize size: Int) {
+        self.rows = size
+        self.columns = size
+        grid = Array(repeating: 0.0, count: rows * columns)
+        checkDimensionsAreValid()
+        for n in 0..<size {
+            self[n, n] = 1
+        }
     }
     
     func checkDimensionsAreValid() {
@@ -256,6 +268,10 @@ func readDataFromFile(fileName: String, fileNameExtension: String) -> Matrix? {
 var x = Matrix(rows: 2, columns: 2, grid: [1,2,3,4])
 
 var y = Matrix(rows: 2, columns: 2, grid: [3,5,6,7])
+
+var z = Matrix(identityMatrixSize: 3)
+
+print(z)
 
 print(x.transpose())
 
