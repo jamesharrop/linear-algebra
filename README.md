@@ -24,6 +24,10 @@ Transpose of a matrix:
 
     x.transpose()
 
+Inverse of a matrix
+
+    x.inverse()
+
 Multiply two matrices:
 
     x*y

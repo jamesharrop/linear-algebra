@@ -45,12 +45,12 @@ struct Matrix {
 }
 
 extension Matrix {
-    // Accessing elements of the matrix using subscript notation
-    
+
     func indexIsValid(row: Int, column: Int) -> Bool {
         return row >= 0 && row < rows && column >= 0 && column < columns
     }
     
+    // Accessing elements of the matrix using subscript notation
     subscript(row: Int, column: Int) -> Double {
         get {
             assert(indexIsValid(row: row, column: column), "Index out of range")
@@ -73,6 +73,19 @@ extension Matrix {
     func elementMultiply(_ matrix2: Matrix) -> Matrix {
         assert(self.rows == matrix2.rows && self.columns == matrix2.columns)
         return Matrix(rows: self.rows, columns: self.columns, grid: zip(self.grid, matrix2.grid).map(*))
+    }
+    
+    // Inverse of a matrix
+    public func inverse() -> Matrix {
+        assert(self.rows == self.columns, "Error calculating inverse: matrix is not square")
+        var selfGrid = self.grid
+        var N = __CLPK_integer(sqrt(Double(selfGrid.count)))
+        var pivot = [__CLPK_integer](repeating: 0, count: Int(N))
+        var err : __CLPK_integer = 0
+        var workspace = [Double](repeating: 0.0, count: Int(N))
+        dgetrf_(&N, &N, &selfGrid, &N, &pivot, &err)
+        dgetri_(&N, &selfGrid, &N, &pivot, &workspace, &N, &err)
+        return Matrix(rows: self.rows, columns: self.columns, grid: selfGrid)
     }
 
 }
@@ -188,6 +201,11 @@ func *(left: Matrix, right: Double) -> Matrix {
 
 func *(left: Double, right: Matrix) -> Matrix {
     return Matrix(rows: right.rows, columns: right.columns, grid: right.grid.map({$0*left}))
+}
+
+// Are two matrices equal
+func ==(left: Matrix, right: Matrix) -> Bool {
+    return (left.grid == right.grid) && (left.rows == right.rows) && (left.columns == right.columns)
 }
 
 // Useful functions for machine learning
