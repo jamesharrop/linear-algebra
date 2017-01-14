@@ -48,9 +48,9 @@ Multiply by a scalar (double):
 
     2*x
 
-Sum a matrix:
+Sum rows of a matrix:
 
-    sum(x)
+    sumRows(x)
 
 Some useful functions for logistic regression, machine learning:
 

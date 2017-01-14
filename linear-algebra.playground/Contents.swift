@@ -226,9 +226,23 @@ func log(_ input: Matrix) -> Matrix {
     return Matrix(rows: input.rows, columns: input.columns, grid: input.grid.map({log($0)}))
 }
 
-// Sum of a matrix
-func sum(_ input: Matrix) -> Double {
-    return input.grid.reduce(0.0,+)
+// Sum the rows in each column of a matrix
+func sumRows(_ input: Matrix) -> Matrix {
+    var output = Matrix(rows: 1, columns: input.columns)
+    var sum = 0.0
+    for column in 0..<input.columns {
+        sum = 0
+        for row in 0..<input.rows {
+            sum += input[row,column]
+        }
+        output[0,column] = sum
+    }
+    return output
+}
+
+// Sum all elements of a matrix
+func sumAllElements(_ input: Matrix) -> Double {
+    return input.grid.reduce(0.0, +)
 }
 
 // Reading data into a matrix from a CSV file in the resources section of the playground
